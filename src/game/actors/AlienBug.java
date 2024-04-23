@@ -13,6 +13,7 @@ import game.behaviours.WanderBehaviourInSpaceShip;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class AlienBug extends Actor {
     /**
@@ -27,8 +28,14 @@ public class AlienBug extends Actor {
      * Sets up behaviors such as attacking the player with a specific weapon and wandering.
      */
     public AlienBug() {
-        super("Feature-XXX", 'a', 2);
+        super(generateFeatureString(), 'a', 2);
         this.behaviours.put(999, new WanderBehaviourInSpaceShip());
+    }
+
+    public static String generateFeatureString() {
+        Random random = new Random();
+        int number = random.nextInt(1000);  // Generates a random number between 0 and 999
+        return String.format("Feature-%03d", number);  // Formats the number to be exactly three digits with leading zeros if necessary
     }
 
     /**
