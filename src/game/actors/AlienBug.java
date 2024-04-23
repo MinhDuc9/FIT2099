@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Status;
 import game.actions.AttackAction;
+import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviourInSpaceShip;
 
 import java.util.HashMap;
@@ -29,6 +30,7 @@ public class AlienBug extends Actor {
      */
     public AlienBug() {
         super(generateFeatureString(), 'a', 2);
+        this.behaviours.put(1, new FollowBehaviour());
         this.behaviours.put(999, new WanderBehaviourInSpaceShip());
     }
 

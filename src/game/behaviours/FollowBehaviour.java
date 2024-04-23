@@ -10,20 +10,9 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
 
 public class FollowBehaviour implements Behaviour {
-
-    private final Actor target;
-
-    /**
-     * Constructor.
-     *
-     * @param subject the Actor to follow
-     */
-    public FollowBehaviour(Actor subject) {
-        this.target = subject;
-    }
-
     @Override
     public Action getAction(Actor actor, GameMap map) {
+        Actor target = findPlayer(map);
         if(!map.contains(target) || !map.contains(actor))
             return null;
 
@@ -41,6 +30,18 @@ public class FollowBehaviour implements Behaviour {
             }
         }
 
+        return null;
+    }
+
+    private Actor findPlayer(GameMap map) {
+        for (int x = 0; x < map.getXRange().max(); x++) {
+            for (int y = 0; y < map.getYRange().max(); y++) {
+                Location location = map.at(x, y);
+                if (location.containsAnActor() && location.getActor().hasCapability(Status.HOSTILE_TO_ENEMY)) {
+                    return location.getActor();
+                }
+            }
+        }
         return null;
     }
 
