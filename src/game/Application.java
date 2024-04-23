@@ -70,14 +70,12 @@ public class Application {
         gameMap.at(24, 8).addItem(largeBolt);
         gameMap.at(24, 9).addItem(metalSheet);
         gameMap.at(15, 8).addItem(metalPipe);
+        gameMap.at(15, 10).addActor(new AlienBug());
+        gameMap.at(14, 10).addActor(new AlienBug());
 
         Player player = new Player("Intern", '@', 4);
 
         world.addPlayer(player, gameMap.at(15, 6));
-
-        AlienBug alienBug = new AlienBug();
-        gameMap.at(15, 10).addActor(alienBug);
-        alienBug.behaviours.put(1, new FollowBehaviour(player));
 
         world.run();
 
